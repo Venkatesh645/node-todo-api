@@ -1,5 +1,4 @@
 const models = require('../../models');
-debugger
 module.exports.list = (req, res) => {
   models.Item.findAll()
     .then((items) => {
