@@ -1,5 +1,14 @@
+const models = require('../../models');
+debugger
 module.exports.list = (req, res) => {
-  res.json('hello');
+  models.Item.findAll()
+    .then((items) => {
+      res.json({ data: items, success: true, statusCode: 200 });
+    })
+    .catch((error) => {
+      res.json(error.toString());
+    })
+
 }
 
 module.exports.create = (req, res) => {
