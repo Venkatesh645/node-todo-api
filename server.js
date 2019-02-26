@@ -1,20 +1,20 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const todoHandler = require('./src/handlers/todo.handler');
+var bodyParser = require('body-parser');
 
-
-
-app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 8080;
 
-app.use(function(req, res, next){
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Header", "Origin, X-Request-With, Content-Type, Accept");
-  next();
-});
+app.use(cors());
+app.options('*', cors());
 
 app.get('/list', todoHandler.list);
+app.post('/item', todoHandler.create);
+app.post('/updateItemsOrder', todoHandler.updateItemsOrder);
 
 app.listen(PORT, () => {
   console.log(`server started at:${PORT}`);
