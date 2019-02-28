@@ -9,7 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       }
-    );
+    ).then(() => {
+      return queryInterface.addIndex('Items', ['sort_number'])
+    })
   },
 
   down: (queryInterface, Sequelize) => {
@@ -17,6 +19,8 @@ module.exports = {
       'Items',
       'sort_number',
       Sequelize.INTEGER
-    );
+    ).then(() => {
+      return queryInterface.removeIndex('Items', ['sort_number'])
+    })
   }
 };

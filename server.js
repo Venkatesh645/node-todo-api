@@ -14,7 +14,7 @@ app.options('*', cors());
 
 app.get('/list', todoHandler.list);
 app.post('/item', todoHandler.create);
-app.post('/updateItemsOrder', todoHandler.updateItemsOrder);
+app.put('/updateItemsOrder', todoHandler.updateItemsOrder);
 
 app.listen(PORT, () => {
   console.log(`server started at:${PORT}`);
